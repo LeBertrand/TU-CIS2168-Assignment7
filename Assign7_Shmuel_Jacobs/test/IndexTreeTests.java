@@ -47,4 +47,15 @@ public class IndexTreeTests {
         
         System.out.println(tree.toString());
     }
+    
+    @Test
+    public void whatDoStringsDo(){
+        String up = "up";
+        String dup = "up";
+        String low = "low";
+        int ineq = up.compareTo(dup);
+        System.out.println("Comparing duplicate Strings: " + ineq);
+        ineq = up.compareTo(low);
+        System.out.println("Comparing greater to lesser:" + ineq);
+    }
 }

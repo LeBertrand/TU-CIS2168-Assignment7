@@ -24,6 +24,7 @@ public class IndexEntryNode{
     IndexEntryNode right;
     
     //TODO: Don't manually enter numOccurrences. Automatically take length of list
+    //TODO: Would I rather declare places a List<Integer> ?
     IndexEntryNode(String word, Collection<Integer> places){
         this.word = word;
         numOccurrences = places.size();
@@ -36,10 +37,26 @@ public class IndexEntryNode{
         return word;
     }
     
+    public int numberListings(){
+        return places.size();
+    }
+    
+    /**
+     * Compare index listings to find precedence.
+     * Really just compares Strings in the "word" field.
+     * @param listing index entry to compare to
+     * @return positive int if calling entry is greater value than parameter,
+     * 0 if they're equal, negative int otherwise.
+     */
     public int compareTo(IndexEntryNode listing){
         return word.compareTo(listing.getWord());
     }
     
+    /**
+     * Create String to show index entry, with lookup word
+     * and list of appearances.
+     * @return String representation of index entry
+     */
     @Override
     public String toString(){
         String display = "";
@@ -49,5 +66,23 @@ public class IndexEntryNode{
             display += place.toString() + "  ";
         }
         return display;
+    }
+    
+    /**
+     * Check if this entry is the same as the entry in parameter.
+     * Used by tree to detect and handle duplicates.
+     * @param node another entry to compare
+     * @return true is entries list same word
+     */
+    public boolean equals(IndexEntryNode node){
+        return word.equals(node.getWord());
+    }
+    
+    /**
+     * Check if node is a leaf
+     * @return true if both subtrees are empty, false otherwise
+     */
+    public boolean isLeaf(){
+        return (right == null && left == null);
     }
 }
