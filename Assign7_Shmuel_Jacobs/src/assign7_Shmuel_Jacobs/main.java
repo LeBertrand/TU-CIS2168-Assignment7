@@ -11,6 +11,7 @@ package assign7_Shmuel_Jacobs;
  */
 public class main {
 
+    BinarySearchTree<IndexEntry> indexTree;
     /**
      * @param args the command line arguments
      */
