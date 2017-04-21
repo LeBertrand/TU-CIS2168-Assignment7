@@ -2,6 +2,7 @@
  * Test assign7 package for correct interation of small pieces.
  */
 
+import assign7_Shmuel_Jacobs.IndexEntryNode;
 import assign7_Shmuel_Jacobs.IndexTree;
 import java.util.ArrayList;
 import org.junit.After;
@@ -17,6 +18,8 @@ import static org.junit.Assert.*;
  */
 public class IndexTreeTests {
     
+    private IndexTree tree;
+    
     public IndexTreeTests() {
     }
     
@@ -30,6 +33,7 @@ public class IndexTreeTests {
     
     @Before
     public void setUp() {
+        tree = new IndexTree();
     }
     
     @After
@@ -38,24 +42,39 @@ public class IndexTreeTests {
 
     @Test
     public void makePrintNode(){
-        IndexTree tree = new IndexTree();
         ArrayList places = new ArrayList<Integer>(10);
         for(int i = 1; i < 5; i++){
             places.add( (8*i)%11 );
         }
-        tree.addListing("Argument", 4, places);
+        tree.addListing("Argument", places);
         
         System.out.println(tree.toString());
     }
     
     @Test
-    public void whatDoStringsDo(){
-        String up = "up";
-        String dup = "up";
-        String low = "low";
-        int ineq = up.compareTo(dup);
-        System.out.println("Comparing duplicate Strings: " + ineq);
-        ineq = up.compareTo(low);
-        System.out.println("Comparing greater to lesser:" + ineq);
+    public void addListingsPrintTree(){
+        //IndexEntryNode up, dup, low, mid;
+        ArrayList<Integer> places = new ArrayList<>();
+        
+        for(int i = 1; i < 7; i++){
+            places.add(i);
+        }
+        //up = new IndexEntryNode("up", places);
+        tree.addListing("up", places);
+        
+        places.remove(new Integer(3));
+        places.remove(new Integer(5));
+        
+        tree.addListing("low", places);
+        
+        places = new ArrayList();
+        for(int i = 0; i < 4; i++){
+            places.add(2*i%3);
+        }
+        
+        tree.addListing("up", places);
+        tree.addListing("mid", places);
+        
+        System.out.println(tree.toString());
     }
 }

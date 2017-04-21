@@ -28,8 +28,9 @@ public class IndexEntryNode{
     IndexEntryNode(String word, Collection<Integer> places){
         this.word = word;
         numOccurrences = places.size();
+        //TODO: Sort place listing
         this.places = new ArrayList(places);
-        //use abstract super to allow arrays to be passed into same constructor
+        //use abstract super to allow passed into same constructor
     }
     
     protected String getWord(){

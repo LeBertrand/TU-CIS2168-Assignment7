@@ -22,9 +22,17 @@ public class IndexTree {
 
     protected IndexEntryNode root;
 
-    //TODO: This is dummy method. Find a place to add it really, and decide bool
     public boolean addListing(String word, Collection<Integer> places) {
         IndexEntryNode insertion = new IndexEntryNode(word.toLowerCase(), places);
+        if (root == null) {
+            root = insertion;
+            return true;
+        } else {
+            return addListing(root, insertion);
+        }
+    }
+    
+    public boolean addListing(IndexEntryNode insertion){
         if (root == null) {
             root = insertion;
             return true;
@@ -62,6 +70,7 @@ public class IndexTree {
             }
         }
         //flow shouldn't reach here except when listings match
+        //TODO: fall-through reaches here when user tries to update
         return added;
     }
 
@@ -112,7 +121,7 @@ class NodePrinter implements NodeWorker {
 
     @Override
     public void workOnNode(IndexEntryNode node, StringBuilder output) {
-        output.append(node.getWord());
+        output.append(node.getWord() + ": ");
         for (int i = 0;
                 i < node.numberListings();
                 i++) {
