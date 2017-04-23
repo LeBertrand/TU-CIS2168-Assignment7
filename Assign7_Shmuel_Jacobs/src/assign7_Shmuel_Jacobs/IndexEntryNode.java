@@ -5,11 +5,13 @@
  * Index Entry 
  * Data Object holding information for index entry,
  * and functioning as node in Binary Search Tree that implements Index
+ * Redundancies are built in to ignore case, but bugs may exist
  */
 package assign7_Shmuel_Jacobs;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -25,8 +27,8 @@ public class IndexEntryNode{
     
     //TODO: Don't manually enter numOccurrences. Automatically take length of list
     //TODO: Would I rather declare places a List<Integer> ?
-    IndexEntryNode(String word, Collection<Integer> places){
-        this.word = word;
+    public IndexEntryNode(String word, Collection<Integer> places){
+        this.word = word.toLowerCase();
         numOccurrences = places.size();
         //TODO: Sort place listing
         this.places = new ArrayList(places);
@@ -42,6 +44,21 @@ public class IndexEntryNode{
         return places.size();
     }
     
+    public ArrayList listPlaces(){
+        return (ArrayList) places.clone();
+    }
+    
+    protected void setPlaces(List<Integer> places){
+        this.places = new ArrayList(places);
+        numOccurrences = places.size();
+    }
+    
+    protected void appendPlaces(int place){
+        places.add(place);
+    }
+    
+    
+    
     /**
      * Compare index listings to find precedence.
      * Really just compares Strings in the "word" field.
@@ -50,7 +67,17 @@ public class IndexEntryNode{
      * 0 if they're equal, negative int otherwise.
      */
     public int compareTo(IndexEntryNode listing){
-        return word.compareTo(listing.getWord());
+        return word.compareToIgnoreCase(listing.getWord());
+    }
+    
+    /**
+     * Compare word to a String in parameter
+     * @param word string to compare to local word
+     * @return positive int if calling entry is greater value than parameter,
+     * 0 if they're equal, negative int otherwise.
+     */
+    public int compareTo(String word){
+        return this.word.compareToIgnoreCase(word);
     }
     
     /**
@@ -76,7 +103,7 @@ public class IndexEntryNode{
      * @return true is entries list same word
      */
     public boolean equals(IndexEntryNode node){
-        return word.equals(node.getWord());
+        return word.equalsIgnoreCase(node.getWord());
     }
     
     /**

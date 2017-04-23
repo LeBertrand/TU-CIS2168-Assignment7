@@ -5,9 +5,15 @@
  * Index Tree
  * Binary Search tree whose nodes each contain information of 
  * an index listing. Tree implements an index.
+ * Contains helper method for in-order traversal, but not for a binary depth
+ * travel, because find, add and remove behave so differently.
  */
 package assign7_Shmuel_Jacobs;
 
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -23,20 +29,35 @@ public class IndexTree {
 
     protected IndexEntryNode root;
 
+    /**
+     * Insert new word into index, wrapping into a node and putting node in
+     * tree.
+     *
+     * @param word word to add to index
+     * @param places line numbers where word has been found
+     * @return true if node is inserted, false otherwise
+     */
     public boolean addListing(String word, List<Integer> places) {
-        IndexEntryNode insertion = new IndexEntryNode(word.toLowerCase(), places.sort());
-        if (root == null) {
-            root = insertion;
-            return true;
-        } else {
-            return addListing(root, insertion);
-        }
+        IndexEntryNode insertion = new IndexEntryNode(word.toLowerCase(), places);
+        return addListing(insertion);
     }
 
+    /**
+     * Insert new node into index tree
+     *
+     * @param insertion listing to insert into tree
+     * @return
+     */
     public boolean addListing(IndexEntryNode insertion) {
         if (root == null) {
             root = insertion;
             return true;
+        } else if (root.equals(insertion)) {
+            //case: update occurring at root
+            insertion.left = root.left;
+            insertion.right = root.right;
+            root = insertion;
+            return false;
         } else {
             return addListing(root, insertion);
         }
@@ -46,15 +67,19 @@ public class IndexTree {
      * Recursive method for adding new listings. Do not pass in a null root.
      * Check for that in public.
      *
-     * @param localRoot
-     * @param insertion
+     * @param localRoot root of tree to add listing to
+     * @param insertion node containing listing to add
      * @return true if listing was added
      */
     private boolean addListing(IndexEntryNode localRoot,
             IndexEntryNode insertion) {
         boolean added = false;
+        //case: update existing node
+        if (localRoot.equals(insertion)) {
+            localRoot.setPlaces(insertion.listPlaces());
+        }//inneficient--just here for safety--updates should use append method
         //case: insertion is less than localRoot
-        if (localRoot.compareTo(insertion) > 0) {
+        else if (localRoot.compareTo(insertion) > 0) {
             if (localRoot.left == null) {
                 localRoot.left = insertion;
                 added = true;
@@ -76,6 +101,36 @@ public class IndexTree {
     }
 
     /**
+     * Recursive method for finding listing in tree
+     *
+     * @param localRoot root of tree to search
+     * @param word value to look for among listings in tree
+     * @return null if value not found, or node containing target word
+     */
+    private IndexEntryNode find(IndexEntryNode localRoot, String word) {
+        //case: reached null node, which means it's not here
+        if (localRoot == null) {
+            return localRoot;
+        } else if (localRoot.getWord().equals(word)) {
+            return localRoot;
+        } else if (localRoot.compareTo(word) > 0) {
+            //local root is greater than target word
+            return find(localRoot.left, word);
+        }//last case: local roo is less than target word
+        return find(localRoot.right, word);
+    }
+
+    /**
+     * Public wrapper for finding listing in tree
+     *
+     * @param word target String to search for
+     * @return null if value not found, otherwise node containing target word
+     */
+    public IndexEntryNode find(String word) {
+        return find(root, word);
+    }
+
+    /**
      * Print out entire index listing. Calls in0order traversal helper method.
      *
      * @return String of entire index.
@@ -94,6 +149,20 @@ public class IndexTree {
         }, inOrderSB);
 
         return inOrderSB.toString();
+    }
+
+    //TODO: Refactor. This file should only be the data structure.
+    //In/Out should be its own file, working with an instance of this class.
+    //TODO: Better system for finding/naming log file.
+    public boolean logIndex() throws IOException {
+        boolean logged = false;
+        try (PrintWriter output = new PrintWriter(new FileWriter("index_file.txt"))) {
+            output.print(toString());
+            logged = true;
+        } catch (FileNotFoundException e) {
+            System.out.println("Problem with locating output file");
+        }
+        return logged;
     }
 
     /*

@@ -2,8 +2,10 @@
  * Test assign7 package for correct interation of small pieces.
  */
 
+
 import assign7_Shmuel_Jacobs.IndexEntryNode;
 import assign7_Shmuel_Jacobs.IndexTree;
+import java.io.IOException;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -52,7 +54,7 @@ public class IndexTreeTests {
     }
     
     @Test
-    public void addListingsPrintTree(){
+    public void addListingsPrintSave() throws IOException{
         //IndexEntryNode up, dup, low, mid;
         ArrayList<Integer> places = new ArrayList<>();
         
@@ -76,5 +78,35 @@ public class IndexTreeTests {
         tree.addListing("mid", places);
         
         System.out.println(tree.toString());
+        boolean logged = tree.logIndex();
+        if(logged){
+            System.out.println("Log Saved");
+        }
+        
+    }
+    
+    @Test
+    public void canFindRootChildAbsent(){
+        //Empty tree returns null for any search
+        tree.addListing(null);
+        IndexEntryNode found = tree.find("Alpha");
+        assertEquals(null, found);
+        
+        //find root of tree
+        ArrayList places = new ArrayList<Integer>();
+        IndexEntryNode insertion = new IndexEntryNode("mid", places);
+        tree.addListing("mid", places);
+        found = tree.find("mid");
+        assertTrue(found.equals(insertion));
+        
+        //find left child (also checks if case is handled)
+        insertion = new IndexEntryNode("Alpha", places);
+        tree.addListing(insertion);
+        found = tree.find("alpha");
+        assertTrue(found.equals(insertion));
+        
+        //still doesn't return absent
+        found = tree.find("up");
+        assertEquals(null, found);
     }
 }
