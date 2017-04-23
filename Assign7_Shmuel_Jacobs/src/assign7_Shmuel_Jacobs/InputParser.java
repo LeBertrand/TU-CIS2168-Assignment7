@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -30,20 +31,27 @@ public class InputParser {
 
     //TODO: Trim off all non-characters
     public void indexTextFile(IndexTree index) throws IOException {
-        String[] textLine = fileRead.readLine().split(" ");
+        String[] wordsInLine;
+        String textLine = fileRead.readLine();
         //visit every line in the document
         for (lineNumber = 1; textLine != null; lineNumber++) {
+            wordsInLine = textLine.split(" ");
             //for each word
-            for (String word : textLine) {
+            for (String word : wordsInLine) {
                 //validate word and remove non-chars
                 word.trim();//wrong method--remove punctuation
                 IndexEntryNode listing = index.find(word);
                 if (listing == null) {//word not in index yet--add
-                    index.addListing(word);
-                } else {//word has been indexed--add this line number to its listing
-                    listing.appendPlaces(lineNumber);
+                    ArrayList onePlace = new ArrayList<Integer>();
+                    onePlace.add(1);
+                    index.addListing(word, onePlace);
+                } else //add this line number to its listing
+                {
+                    index.find(word).appendPlaces(lineNumber);
                 }
             }
+            textLine = fileRead.readLine();
+
         }
         fileRead.close();
     }

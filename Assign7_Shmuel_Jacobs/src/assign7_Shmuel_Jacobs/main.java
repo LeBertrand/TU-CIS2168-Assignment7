@@ -24,6 +24,7 @@ public class main {
         try{
             InputParser parser = new InputParser(fileName);
             parser.indexTextFile(tree);
+            tree.logIndex();
         }
         catch(FileNotFoundException e){
             System.out.println("File not found. Verify file name and location.");

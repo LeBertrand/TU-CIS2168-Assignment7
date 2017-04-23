@@ -50,9 +50,8 @@ public class IndexTree {
      * @return true if node is inserted, false otherwise
      */
     public boolean addListing(String word) {
-        ArrayList emptyList = new ArrayList<Integer>();
         IndexEntryNode insertion = new IndexEntryNode(
-                word.toLowerCase(), emptyList);
+                word.toLowerCase(), new ArrayList<>());
         return addListing(insertion);
     }
 
@@ -154,10 +153,11 @@ public class IndexTree {
         StringBuilder inOrderSB = new StringBuilder();
         inOrderTraversalHelper(root, (IndexEntryNode node, StringBuilder output) -> {
             output.append(node.getWord() + ": ");
+            List places = node.listPlaces();
             for (int i = 0;
                     i < node.numberListings();
                     i++) {
-                output.append(i + "  ");
+                output.append(places.get(i) + "  ");
             }
             output.append('\n');
         }, inOrderSB);
@@ -171,7 +171,7 @@ public class IndexTree {
     public boolean logIndex() throws IOException {
         boolean logged = false;
         try (PrintWriter output = new PrintWriter(new FileWriter("index_file.txt"))) {
-            output.print(toString());
+            output.println(toString());
             logged = true;
         } catch (FileNotFoundException e) {
             System.out.println("Problem with locating output file");
