@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Function;
 
 /**
@@ -22,8 +23,8 @@ public class IndexTree {
 
     protected IndexEntryNode root;
 
-    public boolean addListing(String word, Collection<Integer> places) {
-        IndexEntryNode insertion = new IndexEntryNode(word.toLowerCase(), places);
+    public boolean addListing(String word, List<Integer> places) {
+        IndexEntryNode insertion = new IndexEntryNode(word.toLowerCase(), places.sort());
         if (root == null) {
             root = insertion;
             return true;
@@ -31,8 +32,8 @@ public class IndexTree {
             return addListing(root, insertion);
         }
     }
-    
-    public boolean addListing(IndexEntryNode insertion){
+
+    public boolean addListing(IndexEntryNode insertion) {
         if (root == null) {
             root = insertion;
             return true;
@@ -82,7 +83,15 @@ public class IndexTree {
     @Override
     public String toString() {
         StringBuilder inOrderSB = new StringBuilder();
-        inOrderTraversalHelper(root, new NodePrinter(), inOrderSB);
+        inOrderTraversalHelper(root, (IndexEntryNode node, StringBuilder output) -> {
+            output.append(node.getWord() + ": ");
+            for (int i = 0;
+                    i < node.numberListings();
+                    i++) {
+                output.append(i + "  ");
+            }
+            output.append('\n');
+        }, inOrderSB);
 
         return inOrderSB.toString();
     }
@@ -108,25 +117,5 @@ public class IndexTree {
             inOrderTraversalHelper(localRoot.right, func, output);
 
         }
-    }
-}
-
-/**
- * Implementation of NodeWorker interface, to be used to print the node it's
- * given.
- *
- * @author Shmuel Jacobs
- */
-class NodePrinter implements NodeWorker {
-
-    @Override
-    public void workOnNode(IndexEntryNode node, StringBuilder output) {
-        output.append(node.getWord() + ": ");
-        for (int i = 0;
-                i < node.numberListings();
-                i++) {
-            output.append(i + "  ");
-        }
-        output.append('\n');
     }
 }
