@@ -43,6 +43,20 @@ public class IndexTree {
     }
 
     /**
+     * Insert new word into index, wrapping into a node and putting node in
+     * tree.
+     *
+     * @param word word to add to index
+     * @return true if node is inserted, false otherwise
+     */
+    public boolean addListing(String word) {
+        ArrayList emptyList = new ArrayList<Integer>();
+        IndexEntryNode insertion = new IndexEntryNode(
+                word.toLowerCase(), emptyList);
+        return addListing(insertion);
+    }
+
+    /**
      * Insert new node into index tree
      *
      * @param insertion listing to insert into tree
