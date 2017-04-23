@@ -5,18 +5,33 @@
  */
 package assign7_Shmuel_Jacobs;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 /**
  *
  * @author J
  */
 public class main {
 
-    BinarySearchTree<IndexEntry> indexTree;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        String fileName = args[0];
+        
+        IndexTree tree = new IndexTree();
+        try{
+            InputParser parser = new InputParser(fileName);
+            parser.indexTextFile(tree);
+        }
+        catch(FileNotFoundException e){
+            System.out.println("File not found. Verify file name and location.");
+        }
+        catch(IOException e){
+            System.out.println("Unknown difficulty handling file.");
+        }
+        
     }
     
 }

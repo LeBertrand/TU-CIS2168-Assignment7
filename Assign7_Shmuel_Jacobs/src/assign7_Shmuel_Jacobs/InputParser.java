@@ -45,5 +45,6 @@ public class InputParser {
                 }
             }
         }
+        fileRead.close();
     }
 }
