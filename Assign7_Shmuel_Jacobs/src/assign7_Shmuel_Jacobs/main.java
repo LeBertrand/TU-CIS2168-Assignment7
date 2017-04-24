@@ -25,10 +25,19 @@ public class main {
         String fileIn = args[0];
         String fileOut = args[1];
         
+        static UI userIn;
+        
         IndexTree tree = new IndexTree();
         try{
+            //read file into binary tree
             IOParser parser = new IOParser(fileIn);
             parser.indexTextFile(tree);
+            
+            //allow user to search for specific words
+            userIn = new UI(tree);
+            userIn.takeUserSearches();
+            
+            //write index to file
             parser.logIndex(tree, fileOut);
         }
         catch(FileNotFoundException e){

@@ -41,31 +41,59 @@ public class IOParser {
      * @param index tree to fill with words from file
      * @throws IOException if fileRead is working on invalid file 
      */
-    //TODO: Trim off all non-characters
     public void indexTextFile(IndexTree index) throws IOException {
+        //String array for holding lines of text and String for individual words
         String[] wordsInLine;
         String textLine = fileRead.readLine();
+        
         //visit every line in the document
         for (lineNumber = 1; textLine != null; lineNumber++) {
+            
             wordsInLine = textLine.split(" ");
+            
             //for each word
             for (String word : wordsInLine) {
+                //TODO: test trim method
                 //validate word and remove non-chars
-                word = word.trim();//wrong method--remove punctuation
-                IndexEntryNode listing = index.find(word);
-                if (listing == null) {//word not in index yet--add
-                    ArrayList onePlace = new ArrayList<Integer>();
-                    onePlace.add(lineNumber);
-                    index.addListing(word, onePlace);
-                } else //add this line number to its listing
-                {
-                    index.find(word).appendPlaces(lineNumber);
+                try{
+                    word = word.trimTrimEndPunct();
+                    IndexEntryNode listing = index.find(word);
+                    if (listing == null) {//word not in index yet--add
+                        ArrayList onePlace = new ArrayList<Integer>();
+                        onePlace.add(lineNumber);
+                        index.addListing(word, onePlace);
+                    } else { //add this line number to its listing
+                        index.find(word).appendPlaces(lineNumber);
+                    }
                 }
+                catch (IndexOutOfBoundsException e){}
             }
             textLine = fileRead.readLine();
 
         }
         fileRead.close();
+    }
+    
+    /**
+     * Remove all non-alphabetic characters from input string.
+     * @param string String to remove all non-letters from
+     * @return modified version of input string
+     * @throws IndexOutOfBoundsException if input has no letters
+     */
+    public String trimEndPunct(String string) throws IndexOutOfBoundsException {
+        
+        Stringbuilder word = new Stringbuilder(string);
+        while(!Character.isAlphabetic(word.charAt(0)){
+            word.deleteCharAt(0);
+        }
+        
+        while(!Character.isAlphabetic( word.charAt(word.length() - 1) ) ){
+            word.deleteCharAt( word.length() - 1 );
+        }
+        
+        string = word.toString();
+        
+        return string;
     }
     
     /**
