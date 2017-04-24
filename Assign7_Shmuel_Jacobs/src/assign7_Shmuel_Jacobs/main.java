@@ -1,7 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* 
+ * CIS2168 006 Data Structures Spring 2017
+ * Shmuel Jacobs shmuel.jacobs@temple.edu
+ * Assignment 7
+ * Main Application Class
+ * Read data in file named in first arg.
+ * Create a tree and place that data into it.
+ * Write the in-order traversal of that tree to the file named in second arg.
  */
 package assign7_Shmuel_Jacobs;
 
@@ -10,27 +14,30 @@ import java.io.IOException;
 
 /**
  *
- * @author J
+ * @author Shmuel Jacobs
  */
 public class main {
 
     /**
-     * @param args the command line arguments
+     * @param args names of file to read from and file to write to
      */
     public static void main(String[] args) {
-        String fileName = args[0];
+        String fileIn = args[0];
+        String fileOut = args[1];
         
         IndexTree tree = new IndexTree();
         try{
-            InputParser parser = new InputParser(fileName);
+            IOParser parser = new IOParser(fileIn);
             parser.indexTextFile(tree);
-            tree.logIndex();
+            parser.logIndex(tree, fileOut);
         }
         catch(FileNotFoundException e){
             System.out.println("File not found. Verify file name and location.");
+            System.out.println(e.toString());
         }
         catch(IOException e){
             System.out.println("Unknown difficulty handling file.");
+            System.out.println(e.toString());
         }
         
     }

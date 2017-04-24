@@ -1,0 +1,112 @@
+,: 9  
+1.: 1  
+2.: 6  
+a: 7  7  8  9  10  11  12  16  20  21  
+all: 18  
+allow: 20  
+alphabetical: 19  
+an: 12  12  14  19  
+and: 10  
+any: 22  
+application: 7  12  
+applied: 2  
+are: 7  11  
+array: 12  
+arraylist.: 12  
+as: 21  
+assignment: 1  
+at: 17  
+be: 2  17  
+binary: 21  
+book: 7  
+by: 16  19  
+can: 2  
+class: 8  12  
+class,: 13  
+count: 10  
+create: 14  
+credit.: 22  
+data: 3  8  9  22  
+define: 8  12  
+display: 18  
+do: 13  
+document: 10  
+each: 9  11  
+empty: 14  
+entered: 16  
+entries: 15  16  18  
+fields: 9  
+file,: 10  
+file.: 16  
+first: 8  
+following: 13  
+for: 11  
+get: 22  
+given: 20  
+going: 7  
+has: 9  
+help: 1  
+how: 2  3  4  
+implement: 7  21  
+in: 13  16  18  18  20  
+increasing: 18  
+index: 7  15  18  
+indextree: 21  
+indextreetest.: 13  
+inorder: 19  
+input: 16  
+java: 7  8  12  
+learn: 3  
+line: 10  11  20  
+must: 16  21  
+named: 9  12  
+next: 12  
+node: 9  
+nodes: 15  
+not: 22  
+number: 11  
+numbers: 11  20  
+object: 14  15  18  
+object.: 21  
+objectives: 1  
+occurrence: 10  
+occurrence.: 11  
+of: 10  10  11  15  19  20  
+or: 12  16  
+order: 19  
+order.: 17  
+otherwise,: 22  
+overview: 6  
+performing: 19  
+populate: 15  
+problem: 2  
+program: 3  
+random: 17  
+search: 21  
+solving: 2  
+store: 9  
+stored: 11  16  
+structure: 3  8  
+structure.: 22  
+text: 16  
+that: 10  
+the: 11  13  15  15  16  18  18  20  20  20  
+these: 16  
+this: 1  13  19  21  
+to: 2  3  7  7  9  20  
+to:: 1  
+traversal: 19  
+tree: 22  
+tree.: 8  
+understand: 4  
+user: 16  20  
+using: 3  8  11  15  
+where: 9  
+will: 1  13  22  
+word: 10  11  20  
+word,: 9  
+works: 4  
+write: 7  
+you: 21  22  
+•: 2  3  4  14  15  18  20  
+

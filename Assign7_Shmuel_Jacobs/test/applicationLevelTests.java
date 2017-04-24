@@ -4,17 +4,12 @@
  * and open the template in the editor.
  */
 
-import assign7_Shmuel_Jacobs.IndexTree;
-import assign7_Shmuel_Jacobs.InputParser;
 import assign7_Shmuel_Jacobs.main;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -35,9 +30,9 @@ public class applicationLevelTests {
     
     @Test
     public void simMain(){
-        String fileName ="fileIn.txt";
+        String fileName ="BMMessage.txt";
         
-        String testArgs[] = {fileName};
+        String testArgs[] = {fileName, "BMIndex.txt"};
         
         main.main(testArgs);
     }

@@ -53,6 +53,7 @@ public class IndexTreeTests {
         System.out.println(tree.toString());
     }
     
+    /*
     @Test
     public void addListingsPrintSave() throws IOException{
         //IndexEntryNode up, dup, low, mid;
@@ -83,7 +84,7 @@ public class IndexTreeTests {
             System.out.println("Log Saved");
         }
         
-    }
+    } */
     
     @Test
     public void canFindRootChildAbsent(){
@@ -108,5 +109,16 @@ public class IndexTreeTests {
         //still doesn't return absent
         found = tree.find("up");
         assertEquals(null, found);
+    }
+    
+    @Test
+    public void howDoesTrimWork(){
+        String wordy = "up  ";
+        String tight = wordy.trim();
+        System.out.println(wordy + '|');
+        System.out.println(tight + '|');
+        if(wordy.equals(tight)){
+            System.out.println("Trim is mutator.");
+        }
     }
 }

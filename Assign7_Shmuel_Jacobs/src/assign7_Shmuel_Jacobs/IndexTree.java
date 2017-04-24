@@ -10,16 +10,8 @@
  */
 package assign7_Shmuel_Jacobs;
 
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.Serializable;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.function.Function;
 
 /**
  *
@@ -108,8 +100,6 @@ public class IndexTree {
                 added = addListing(localRoot.right, insertion);
             }
         }
-        //flow shouldn't reach here except when listings match
-        //TODO: fall-through reaches here when user tries to update
         return added;
     }
 
@@ -152,12 +142,12 @@ public class IndexTree {
     public String toString() {
         StringBuilder inOrderSB = new StringBuilder();
         inOrderTraversalHelper(root, (IndexEntryNode node, StringBuilder output) -> {
-            output.append(node.getWord() + ": ");
+            output.append(node.getWord()).append(": ");
             List places = node.listPlaces();
             for (int i = 0;
                     i < node.numberListings();
                     i++) {
-                output.append(places.get(i) + "  ");
+                output.append(places.get(i)).append("  ");
             }
             output.append('\n');
         }, inOrderSB);
@@ -165,19 +155,6 @@ public class IndexTree {
         return inOrderSB.toString();
     }
 
-    //TODO: Refactor. This file should only be the data structure.
-    //In/Out should be its own file, working with an instance of this class.
-    //TODO: Better system for finding/naming log file.
-    public boolean logIndex() throws IOException {
-        boolean logged = false;
-        try (PrintWriter output = new PrintWriter(new FileWriter("index_file.txt"))) {
-            output.println(toString());
-            logged = true;
-        } catch (FileNotFoundException e) {
-            System.out.println("Problem with locating output file");
-        }
-        return logged;
-    }
 
     /*
     private String toString(IndexEntryNode localRoot){

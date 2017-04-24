@@ -1,0 +1,10 @@
+a complete message goes here CASE INSENSITIVE aS far a I know you can
+use any word you like but you need to hit your own carriage returns to
+break up lines
+
+
+watermelon tastes good
+so do peaches
+ketchup stinks
+relish is okay
+fried saurkraut is the worst thing ever

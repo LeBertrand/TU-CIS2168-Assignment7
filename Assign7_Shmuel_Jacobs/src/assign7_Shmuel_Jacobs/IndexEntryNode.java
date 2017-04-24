@@ -18,41 +18,61 @@ import java.util.List;
  * @author Shmuel Jacobs
  */
 public class IndexEntryNode{
-    private String word;
+    private final String word;
     private int numOccurrences;
     private ArrayList<Integer> places;
     
     IndexEntryNode left;
     IndexEntryNode right;
     
-    //TODO: Don't manually enter numOccurrences. Automatically take length of list
-    //TODO: Would I rather declare places a List<Integer> ?
+    /**
+     * Create new node index entry.
+     * @param word String holding word to index
+     * @param places list to hold line numbers for all occurrences of word
+     */
     public IndexEntryNode(String word, Collection<Integer> places){
         this.word = word.toLowerCase();
         numOccurrences = places.size();
-        //TODO: Sort place listing
+        //Any use in sorting listing? Requires new declaration and reader goes in order anyway
         this.places = new ArrayList(places);
         //use abstract super to allow passed into same constructor
     }
     
+    /**
+     * Get string holding word indexed.
+     */
     protected String getWord(){
-        //bad data hiding--clone then pass?
+        //bad data hiding--except word is final
         return word;
     }
     
+    /**
+     * Return the number of times this word appears. 
+     */
     public int numberListings(){
         return places.size();
     }
     
+    /**
+     * Return the actual list of places where word was found.
+     */
     public ArrayList listPlaces(){
         return (ArrayList) places.clone();
     }
     
+    /**
+     * Overwrite the current list of places where this word was found.
+     * @param places new list of places
+     */
     protected void setPlaces(List<Integer> places){
         this.places = new ArrayList(places);
         numOccurrences = places.size();
     }
     
+    /**
+     * Add another to the list of places where this word was found.
+     * @param place line number where word was found
+     */
     protected void appendPlaces(int place){
         places.add(place);
     }
