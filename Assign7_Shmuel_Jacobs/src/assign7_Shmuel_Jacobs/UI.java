@@ -7,6 +7,8 @@
  */
  package assign7_Shmuel_Jacobs;
  
+import java.util.Scanner;
+
 /**
  * @author Shmuel Jacobs
  */
@@ -50,7 +52,7 @@ public class UI{
         //until user types ":q"...
         while(!userEntered.equals(":q")){
             //get listing with the word he wants
-            IndexEntryNode entry = tree.find(userEntered);
+            IndexEntryNode entry = index.find(userEntered);
             //case: it's not here, so print "not found" message
             if(entry == null){
                 System.out.println(NOTFOUNDMSG);
@@ -59,8 +61,8 @@ public class UI{
             }
             
             //prompt user and get next search
-            System.out.println(EACHSEARCHMSG)
-            userEntered = Scanner.nextLine();
+            System.out.println(EACHSEARCHMSG);
+            userEntered = userIn.nextLine();
         }
         
     }

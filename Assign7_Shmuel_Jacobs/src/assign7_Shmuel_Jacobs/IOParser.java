@@ -56,7 +56,7 @@ public class IOParser {
                 //TODO: test trim method
                 //validate word and remove non-chars
                 try{
-                    word = word.trimTrimEndPunct();
+                    word = trimEndPunct(word);
                     IndexEntryNode listing = index.find(word);
                     if (listing == null) {//word not in index yet--add
                         ArrayList onePlace = new ArrayList<Integer>();
@@ -82,8 +82,8 @@ public class IOParser {
      */
     public String trimEndPunct(String string) throws IndexOutOfBoundsException {
         
-        Stringbuilder word = new Stringbuilder(string);
-        while(!Character.isAlphabetic(word.charAt(0)){
+        StringBuilder word = new StringBuilder(string);
+        while(!Character.isAlphabetic(word.charAt(0))){
             word.deleteCharAt(0);
         }
         
