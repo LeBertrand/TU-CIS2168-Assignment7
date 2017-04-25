@@ -17,7 +17,7 @@ import java.io.IOException;
  *
  * @author Shmuel Jacobs
  */
-public class Main {
+public class IndexTreeTest {
 
     /**
      * @param args names of file to read from and file to write to
