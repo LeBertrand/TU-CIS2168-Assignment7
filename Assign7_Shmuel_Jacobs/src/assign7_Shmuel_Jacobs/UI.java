@@ -10,6 +10,7 @@
 import java.util.Scanner;
 
 /**
+ * User interface.
  * @author Shmuel Jacobs
  */
 public class UI{

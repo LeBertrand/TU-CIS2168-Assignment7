@@ -4,7 +4,7 @@
 package assign7_Shmuel_Jacobs;
 
 /**
- *
+ * Functional interface allows lambdas inside traversals.
  * @author Shmuel Jacobs
  */
 public interface NodeWorker {

@@ -17,7 +17,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
- *
+ * Handles all application IO.
  * @author Shmuel Jacobs
  */
 public class IOParser {

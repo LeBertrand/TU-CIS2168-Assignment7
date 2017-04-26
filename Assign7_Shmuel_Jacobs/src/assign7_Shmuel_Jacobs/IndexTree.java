@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Binary Tree composed of IndexEntryNodes.
  *
  * @author Shmuel Jacobs
  */
@@ -142,13 +143,7 @@ public class IndexTree {
     public String toString() {
         StringBuilder inOrderSB = new StringBuilder();
         inOrderTraversalHelper(root, (IndexEntryNode node, StringBuilder output) -> {
-            output.append(node.getWord()).append(": ");
-            List places = node.listPlaces();
-            for (int i = 0;
-                    i < node.numberListings();
-                    i++) {
-                output.append(places.get(i)).append("  ");
-            }
+            output.append(node.toString());
             output.append('\n');
         }, inOrderSB);
 

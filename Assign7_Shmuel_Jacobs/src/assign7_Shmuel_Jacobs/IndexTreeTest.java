@@ -3,10 +3,7 @@
  * Shmuel Jacobs shmuel.jacobs@temple.edu
  * Assignment 7
  * Main Application Class
- * Read data in file named in first arg.
- * Create a tree and place that data into it.
- * Allow user to perform searches.
- * Write the in-order traversal of that tree to the file named in second arg.
+ * IndexTreeTest
  */
 package assign7_Shmuel_Jacobs;
 
@@ -14,12 +11,17 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
- *
+ * Application main class.
+ * Read data in file named in first arg.
+ * Create a tree and place that data into it.
+ * Allow user to perform searches.
+ * Write the in-order traversal of that tree to the file named in second arg.
  * @author Shmuel Jacobs
  */
 public class IndexTreeTest {
 
     /**
+     * 
      * @param args names of file to read from and file to write to
      */
     public static void main(String[] args) {
